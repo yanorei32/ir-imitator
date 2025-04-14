@@ -42,9 +42,15 @@ Web Browser
 
 ## How to setup
 1. Capture IR Packet with Saleae Logic 2
-  - Don't include 38kHz baseband. (LPF is required)
+   - Don't include 38kHz baseband. (LPF is required)
 1. Export Raw as CSV (ISO8601 format)
 1. Extract IR Packet to JSON with ir-signal-extractor
    - Active-high and active-low are automatically detected.
 1. Write Controller layout in XML
 1. Startup Web Server
+
+## UDP Packet binary format
+- frequency kHz (u16le)
+- voltage inverting delta time (us) (u16le) (n times)
+- checksum (last u16le)
+  - `sum(freq, ...delta_times) & 0xFFFF`
