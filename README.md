@@ -1,8 +1,11 @@
 # IR Imitator
-A simple IR imitator (overkill way).
+Customizable simple IR imitator (overkill way).
+
+Currently, only simple single ir transmission is supported.
 
 ![image](https://github.com/user-attachments/assets/e6441ff6-ce10-4197-ac49-8e65ca5d674f)
 
+## Example Configuration
 ```xml
 <Controllers>
 	<Controller id="HK9811">
@@ -29,3 +32,19 @@ A simple IR imitator (overkill way).
 	</Controller>
 </Controllers>
 ```
+
+## Architecture
+```
+Web Browser
+   `- HTTP POST -> web-ir-remote
+                        `- UDP Packet -> ESP8266 IR Sender
+```
+
+## How to setup
+1. Capture IR Packet with Saleae Logic 2
+  - Don't include 38kHz baseband. (LPF is required)
+1. Export Raw as CSV (ISO8601 format)
+1. Extract IR Packet to JSON with ir-signal-extractor
+   - Active-high and active-low are automatically detected.
+1. Write Controller layout in XML
+1. Startup Web Server
