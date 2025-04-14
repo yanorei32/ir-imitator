@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 linearize = { version = "0.1.4", features = ["derive"] }
-strum = { version = "0.26.3", features = ["derive"] }
 serde = { version = "1.0.219", features = ["derive"] }
+strum = { version = "0.26.3", features = ["derive"] }

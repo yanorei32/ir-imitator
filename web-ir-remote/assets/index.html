@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>IR Imitator</title>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			button {
+				flex: 1;
+				font-size: 5vh;
+			}
+			.VBox {
+				flex: 1;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-content: flex-start;
+			}
+			.HBox {
+				flex: 1;
+				display: flex;
+				flex-direction: row;
+				align-content: flex-start;
+			}
+			.Root {
+				height: 100vh;
+			}
+		</style>
+	</head>
+	<body>
+		<div id=container></div>
+		<script>
+			const container = document.getElementById("container");
+
+			function create_nodes(html, xml) {
+				if (xml.nodeName == "Button") {
+					const button = document.createElement("button");
+
+					button.dataset.action = xml.getAttribute("action");
+					button.textContent = xml.getAttribute("label");
+
+					html.appendChild(button);
+					return;
+				}
+
+				const div = document.createElement("div");
+				div.classList.add(xml.nodeName);
+
+				for (const child of xml.children)
+					create_nodes(div, child);
+
+				html.appendChild(div);
+			}
+
+			async function button_handler(e) {
+				await fetch(`/api/act?action=${e.target.dataset.action}`, { method: "POST" });
+			}
+
+			window.addEventListener('load', async () => {
+				const parser = new DOMParser();
+				const res = await fetch("/api/xml");
+				const txt = await res.text();
+				const dom = await parser.parseFromString(txt, "text/xml");
+
+				for (const controller of dom.querySelectorAll("Controller")) {
+					const div = document.createElement("div");
+					div.id = controller.id;
+					div.classList.add("Root");
+					create_nodes(div, controller.children[0]);
+					container.appendChild(div);
+				}
+
+				for (const button of document.querySelectorAll("button"))
+					button.addEventListener('click', button_handler);
+			});
+		</script>
+	</body>
+</html>
