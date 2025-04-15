@@ -43,6 +43,7 @@ Web Browser
 ## How to setup
 1. Capture IR Packet with Saleae Logic 2
    - Don't include 38kHz baseband. (LPF is required)
+   - If you want rename proj/digital.csv to proj, you can use `find . -name "*.csv" -type f | awk '{ split($1,a,"/");  print "cp " $1 " "  "./re0208/" a[2] }' | sh`
 1. Export Raw as CSV (ISO8601 format)
 1. Extract IR Packet to JSON with ir-signal-extractor
    - Active-high and active-low are automatically detected.
