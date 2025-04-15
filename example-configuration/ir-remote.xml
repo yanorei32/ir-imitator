@@ -21,4 +21,17 @@
 			</HBox>
 		</VBox>
 	</Controller>
+	<Controller id="RE0208">
+		<VBox>
+			<Button label="ON/OFF" action="./re0208/1_on_off.csv.0.json" />
+			<HBox>
+				<Button label="全灯" action="./re0208/1_max_brightness.csv.0.json" />
+				<Button label="常夜灯" action="./re0208/1_nightlight.csv.0.json" />
+			</HBox>
+			<VBox>
+				<Button label="明" action="./re0208/1_lighten.csv.0.json" />
+				<Button label="暗" action="./re0208/1_darken.csv.0.json" />
+			</VBox>
+		</VBox>
+	</Controller>
 </Controllers>
