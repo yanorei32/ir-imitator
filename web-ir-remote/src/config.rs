@@ -4,13 +4,13 @@ use serde::Deserialize;
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Controllers {
-    #[serde(rename = "$value")]
+    #[serde(rename = "#content")]
     pub controllers: Vec<Controller>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct Controller {
-    #[serde(rename = "$value")]
+    #[serde(rename = "#content")]
     pub root_node: Node,
 
     #[allow(dead_code)]
@@ -27,13 +27,13 @@ pub struct Button {
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct VBox {
-    #[serde(rename = "$value")]
+    #[serde(rename = "#content")]
     pub children: Vec<Node>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct HBox {
-    #[serde(rename = "$value")]
+    #[serde(rename = "#content")]
     pub children: Vec<Node>,
 }
 
