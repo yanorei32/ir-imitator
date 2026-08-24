@@ -1,0 +1,15 @@
+[package]
+name = "ir-viewer"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.23", features = ["derive"] }
+serde_json = "1.0.140"
+strum = { version = "0.28.0", features = ["strum_macros"] }
+
+model = { path = "../model" }
+strum_macros = "0.28.0"
+ordered-float = "5.5.0"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }

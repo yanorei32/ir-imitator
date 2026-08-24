@@ -3,6 +3,7 @@ resolver = "2"
 
 members = [
 	"ir-signal-extractor",
+	"ir-viewer",
 	"model",
 	"web-ir-remote",
 ]
