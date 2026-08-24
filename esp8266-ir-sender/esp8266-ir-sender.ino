@@ -12,19 +12,29 @@
 #include <WiFiClient.h>
 #include <WiFiServer.h>
 
-#include "wificred.h"
+#include "config.h"
 
 #define UDPBUF_SIZE 2048
 char udpBuffer[UDPBUF_SIZE];
 
-#define UDP_PORT 6464
-WiFiUDP Server;
-
+#ifndef IR_LED
 #define IR_LED 3
+#endif
+
+#ifndef UDP_PORT
+#define UDP_PORT 6464
+#endif
+
+WiFiUDP Server;
 IRsend irsend(IR_LED);
 
 void setup() {
+#if defined(ESP8266)
   Serial.begin(115200, SERIAL_8N1, SERIAL_TX_ONLY);
+#endif
+#if defined(ESP32)
+  Serial.begin(115200);
+#endif
   delay(100);
 
   Serial.println();
